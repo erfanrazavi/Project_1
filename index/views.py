@@ -4,16 +4,16 @@ from django.http import HttpResponse
 
 
 def index_views(request):
-    return render(request , 'index.html')
+    return render(request , 'website/index.html')
 
 def about_views(request):
-    return render(request , 'about.html')
+    return render(request , 'website/about.html')
 
 def blog_views(request):
-    return render(request , 'blog.html')
+    return render(request , 'blog/blog.html')
 
 def contact_views(request):
-    return render(request , 'contact.html')
+    return render(request , 'website/contact.html')
 
 def elements_views(request):
-    return render(request , 'elements.html')
+    return render(request , 'website/elements.html')
