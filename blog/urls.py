@@ -1,8 +1,10 @@
 from django.urls import path
 from blog.views import *
 
+app_name = 'blog'
+
 urlpatterns = [
-    path('blog-single/' , blog_single_views , name = 'blog-single')
-    path('blog-home/' , blog_home_views , name = 'blog-home')
+    path('single' , blog_single_views , name = 'blog-single'),
+    path('' , blog_home_views , name = 'blog-home')
 ]
 
