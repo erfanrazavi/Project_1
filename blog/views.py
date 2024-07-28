@@ -7,8 +7,8 @@ from django.http import Http404
 
 def blog_single_views(request,pid):
     try:
-        posts = BlogPost.objects.get(id=pid)
-        context = {'posts' : posts}
+        posts = BlogPost.objects.get(id=pid , status=1)
+        context = {'posts' : posts }
     except BlogPost.DoesNotExist:
             raise Http404("Given query not found....")
     
@@ -16,7 +16,7 @@ def blog_single_views(request,pid):
     return render(request , 'blog/blog-single.html' ,context)
 
 def blog_home_views(request):
-    posts = BlogPost.objects.all()
+    posts = BlogPost.objects.filter(status=1)
     context = {'posts' : posts}
     
     return render(request , 'blog/blog-home.html' ,context)
