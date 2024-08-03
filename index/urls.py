@@ -7,6 +7,6 @@ urlpatterns = [
     path('' , index_views , name="index"),
     path('about/' , about_views , name="about"),
     path('contact/' , contact_views , name="contact"),
-    path('elements/' , elements_views , name="element"),
+    # path('elements/' , elements_views , name="element"),
     
 ]

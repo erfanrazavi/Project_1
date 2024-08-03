@@ -5,8 +5,8 @@ app_name = 'blog'
 
 urlpatterns = [
     path('<int:pid>' , blog_single_views , name = 'blog-single'),
-    path('' , blog_home_views , name = 'blog-home')
+    path('' , blog_home_views , name = 'blog-home'),
     # ,
-    # path('post-<int:pid>' , test , name='test')
+    path('test' , test , name='test')
 ]
 
