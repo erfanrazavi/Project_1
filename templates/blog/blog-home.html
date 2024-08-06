@@ -98,12 +98,14 @@
 									
 									<ul class="tags">
 										{% for cat in post.category.all %}
- 											 {{cat.name}}{% if not forloop.last %}, {% endif %}
-										{% endfor %}
+ 											 <li>
+												<a href="{%url "blog:category" blog_category=cat.name%}">{{cat.name}}{% if not forloop.last %}, {% endif %}</a>
+											 </li>
+												{% endfor %}
 									</ul>
 									
 									<div class="user-details row">
-										<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{post.author.get_full_name}}</a> <span class="lnr lnr-user"></span></p>
+										<p class="user-name col-lg-12 col-md-12 col-6"><a href="{%url 'blog:author' username_author=post.author.username%}">{{post.author.get_full_name}}</a> <span class="lnr lnr-user"></span></p>
 										<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{post.published_date|date:"d F Y"}}</a> <span class="lnr lnr-calendar-full"></span></p>
 										<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{post.counted_view}}</a> <span class="lnr lnr-eye"></span></p>
 										<p class="comments col-lg-12 col-md-12 col-6"><a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span></p>						
@@ -124,25 +126,31 @@
 							{% endfor %}								
 		                    <nav class="blog-pagination justify-content-center d-flex">
 		                        <ul class="pagination">
+									{% if posts.has_previous %}
 		                            <li class="page-item">
-		                                <a href="#" class="page-link" aria-label="Previous">
+		                                <a href="?page={{ posts.previous_page_number }}" class="page-link" aria-label="Previous">
 		                                    <span aria-hidden="true">
 		                                        <span class="lnr lnr-chevron-left"></span>
 		                                    </span>
 		                                </a>
 		                            </li>
-		                            <li class="page-item"><a href="#" class="page-link">01</a></li>
-		                            <li class="page-item active"><a href="#" class="page-link">02</a></li>
-		                            <li class="page-item"><a href="#" class="page-link">03</a></li>
-		                            <li class="page-item"><a href="#" class="page-link">04</a></li>
-		                            <li class="page-item"><a href="#" class="page-link">09</a></li>
+									{% endif %}
+									{% for i  in posts.paginator.page_range %}
+									{% if posts.number == i %}
+		                            	<li class="page-item active"><a href="?page={{i}}" class="page-link">{{i}}</a></li>
+		                            {% else %}
+										<li class="page-item"><a href="?page={{i}}" class="page-link">{{i}}</a></li>
+		                            {% endif %}
+									{% endfor %}
+		                            {% if posts.has_next %}
 		                            <li class="page-item">
-		                                <a href="#" class="page-link" aria-label="Next">
+		                                <a href="?page={{ posts.paginator.num_pages }}" class="page-link" aria-label="Next">
 		                                    <span aria-hidden="true">
 		                                        <span class="lnr lnr-chevron-right"></span>
 		                                    </span>
 		                                </a>
 		                            </li>
+									{% endif %}
 		                        </ul>
 		                    </nav>
 						</div>
@@ -153,7 +161,8 @@
 
 								{% include "blog/blog-writer.html" %}
 								
-								{% include "blog/blog-post-categories.html" %}
+								{% categories %}
+								
 
 								{% include "blog/popular-post.html" %}
 												
