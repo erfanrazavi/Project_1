@@ -23,9 +23,10 @@ def blog_home_views(request,**kwargs):
    
     if kwargs.get('blog_category') != None:
         posts = posts.filter(category__name=kwargs['blog_category'])
-    context = {'posts' : posts}
+   
     if kwargs.get('username_author') != None:
         posts = posts.filter(author__username=kwargs['username_author'])
+    
     paginator = Paginator(posts, 2)
     page_number = request.GET.get('page')
     

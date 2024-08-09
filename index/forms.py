@@ -1,11 +1,17 @@
-from django import forms
+from django.forms import ModelForm
 
-from index.models import Contact
+from index.models import Contact , NewsLetter
 
-class ContactForm(forms.ModelForm):
+class ContactForm(ModelForm):
     
     
     class Meta:
         model = Contact
+        fields = "__all__"
+class NewsLetterForm(ModelForm):
+    
+    
+    class Meta:
+        model = NewsLetter
         fields = "__all__"
     

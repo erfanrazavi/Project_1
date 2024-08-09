@@ -188,37 +188,36 @@
 					</div>							
 					<div class="row">
 						
-						<div class="active-recent-blog-carusel">
-							{% for post in posts %}
-							<div class="single-recent-blog-post item">
-								<div class="thumb">
-									<img class="img-fluid" src="{{post.image_filed.url }}" alt="">
-								</div>
-								<div class="details">
-									<div class="tags">
-										
-										<ul>
-											{% for cat in post.category.all %}
-											<li>
-												<a href="{% url "blog:category" blog_category=cat.name %}">{{cat.name}}</a>
-											</li>
-											{% endfor %}								
-										</ul>
-										
-									</div>
-									<a href="#"><h4 class="title">{{post.title}}</h4></a>
+				<div class="active-recent-blog-carusel">
+					{% for post in posts %}
+					<div class="single-recent-blog-post item">
+						<div class="thumb">
+							<img class="img-fluid" src="{{post.image_filed.url }}" alt="">
+						</div>
+						<div class="details">
+							<div class="tags">
+								<ul>
+									{% for cat in post.category.all %}
+									<li>
+										<a href="{% url "blog:category" blog_category=cat.name %}">{{cat.name}}{% if not forloop.last %}, {% endif %}</a>
+									</li>
+									{% endfor %}								
+								</ul>
+							</div>
+							<a href="#"><h4 class="title">{{post.title}}</h4></a>
 									<p>
 										{{post.content|truncatechars:200}}
 									</p>
 									<h6 class="date">{{post.published_date|date:"d M Y"}}</h6>
-								</div>	
-							</div>
-							{% endfor %}				
-
-						</div>
-						
+						</div>	
 					</div>
-				</div>	
+																
+					{% endfor %}
+				</div>
+			</div>
+		</div>	
+			
+			
 			</section>
 			<!-- End recent-blog Area -->			
 			{% endblock content %}

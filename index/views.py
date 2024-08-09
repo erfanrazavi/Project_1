@@ -1,9 +1,9 @@
-from django.shortcuts import render , HttpResponse , get_object_or_404 
+from django.shortcuts import render , HttpResponse , get_object_or_404 , HttpResponseRedirect
 from django.http import HttpResponse , Http404
 from .models import Contact
 from django.core.paginator import Paginator ,PageNotAnInteger,EmptyPage
 from blog.models import BlogPost
-from index.forms import ContactForm
+from index.forms import ContactForm , NewsLetterForm
 from django.contrib import messages
 
 
@@ -12,15 +12,6 @@ from django.contrib import messages
 
 def index_views(request):
     posts = BlogPost.objects.filter(status=1)
-    paginator = Paginator(posts , 3)
-    page_number = request.GET.get('page')
-    
-    try:
-        posts = paginator.get_page(page_number)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts.paginator.page(paginator.num_pages)
         
     context = {'posts' : posts}
     return render(request , 'website/index.html' , context)
@@ -30,17 +21,35 @@ def about_views(request):
 
 
 def contact_views(request):
-    form = ContactForm(request.POST)
+    
     
     if request.method == 'POST':
+        form = ContactForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            form.save()
-            messages.success(request, 'Dear %s! submission successful' % name)
-            print('done')
+            contact = form.save(commit=False)
+            contact.name = '*unknown*'
+            if not contact.subject:
+                contact.subject = ''
+            contact.save()
+            messages.success(request, 'Dear submission successful' )
+        else:
+            messages.error(request, 'Dear submission Wrong' )
+
             
+    form = ContactForm()        
         
     return render(request , 'website/contact.html' , {'form' : form})
+
+def news_letter_view(request):
+    if request.method == 'POST':
+        form = NewsLetterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+        else:
+            return HttpResponseRedirect('/')
+
+    
 
 # def elements_views(request):
 #     return render(request , 'website/elements.html')

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from index.models import Contact
+from index.models import Contact , NewsLetter
 # Register your models here.
 
 
@@ -13,3 +13,7 @@ class ContactModelAdmin(admin.ModelAdmin):
     search_fields = ["name" , "subject"]
     list_filter = ['email']
     ordering = ['-created_date']
+    
+@admin.register(NewsLetter)
+class NewsLetterModelAdmin(admin.ModelAdmin):
+    list_display = ['email']
