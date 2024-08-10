@@ -69,6 +69,17 @@ SUMMERNOTE_CONFIG = {
         ],}
 }
 
+#captcha setting
+
+# CAPTCHA_IMAGE_SIZE = (150, 50)  # Size of the image (width, height)
+CAPTCHA_FONT_SIZE = 40          # Font size
+CAPTCHA_LETTER_ROTATION = (-35, 35)  # Rotation range for each letter
+CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_arcs', 'captcha.helpers.noise_dots')  # Noise types
+CAPTCHA_BACKGROUND_COLOR = '#ffffff'  # Background color
+CAPTCHA_FOREGROUND_COLOR = '#000000'  # Text color
+
+CAPTCHA_LENGTH = 6  # Number of characters in the CAPTCHA
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -85,6 +96,7 @@ INSTALLED_APPS = [
     'robots',
     "debug_toolbar",
     'django_summernote',
+    'captcha',
     "taggit",
     'index',
     'blog',
