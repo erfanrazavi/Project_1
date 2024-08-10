@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Contact(models.Model):
     name = models.CharField(max_length=50)
     subject = models.CharField(max_length=255, blank=True)
@@ -19,3 +20,4 @@ class NewsLetter(models.Model):
     
     def __str__(self) -> str:
         return "{}".format(self.email )
+

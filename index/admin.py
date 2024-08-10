@@ -1,5 +1,7 @@
 from django.contrib import admin
 from index.models import Contact , NewsLetter
+
+
 # Register your models here.
 
 
@@ -17,3 +19,6 @@ class ContactModelAdmin(admin.ModelAdmin):
 @admin.register(NewsLetter)
 class NewsLetterModelAdmin(admin.ModelAdmin):
     list_display = ['email']
+    
+
+# Apply summernote to all TextField in model.
