@@ -27,7 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+#sitesFramework
+SITE_ID = 2
+ROBOTS_USE_SITEMAP = True
+ROBOTS_USE_HOST = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'django_extensions',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+    'robots',
+    "debug_toolbar",
+    "taggit",
     'index',
     'blog',
 ]
@@ -49,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -64,10 +75,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                 
             ],
         },
     },
 ]
+# ROBOTS_USE_SITEMAP = False
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -122,6 +135,11 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = BASE_DIR / '/static'
 MEDIA_ROOT = BASE_DIR / 'media'
+INTERNAL_IPS = [
+    
+    "127.0.0.1",
+    
+]
 
 # STATICFILES_DIRS = [
 #     BASE_DIR / "statics",

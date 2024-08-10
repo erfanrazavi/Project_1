@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class Category(models.Model):
@@ -19,12 +21,15 @@ class BlogPost(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     published_date = models.DateTimeField(null=True)
+    tags = TaggableManager()
     
     
     def __str__(self) -> str:
         return " {} - {}".format(self.title , self.id)
     
-    
+    def get_absolute_url(self):
+        return reverse('blog:blog-single', kwargs={'pid':self.id})
+
     class Meta:
         db_table_comment = "Question answers"
         

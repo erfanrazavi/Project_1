@@ -11,5 +11,6 @@ urlpatterns = [
     path('category/<str:blog_category>' , blog_home_views , name = 'category'),
     path('newsletter' , news_letter_view , name = 'newsletter'),
     # path('elements/' , elements_views , name="element"),
+    # path('robots.txt', robots_txt, name='robots_txt'),
     
 ]

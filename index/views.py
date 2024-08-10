@@ -29,7 +29,7 @@ def contact_views(request):
             contact = form.save(commit=False)
             contact.name = '*unknown*'
             if not contact.subject:
-                contact.subject = ''
+                contact.subject = ''    
             contact.save()
             messages.success(request, 'Dear submission successful' )
         else:
@@ -48,7 +48,15 @@ def news_letter_view(request):
             return HttpResponseRedirect('/')
         else:
             return HttpResponseRedirect('/')
-
+        
+# def robots_txt(request):
+#     content = """
+#     User-agent: *
+#     Disallow: /admin/
+#     Disallow: /private/
+#     Sitemap: http://127.0.0.1:8000//sitemap.xml
+#     """
+#     return HttpResponse(content, content_type="text/plain")
     
 
 # def elements_views(request):
