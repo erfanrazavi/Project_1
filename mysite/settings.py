@@ -69,8 +69,10 @@ SUMMERNOTE_CONFIG = {
         ],}
 }
 
-#captcha setting
-
+#captcha admin setting
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
 # CAPTCHA_IMAGE_SIZE = (150, 50)  # Size of the image (width, height)
 CAPTCHA_FONT_SIZE = 40          # Font size
 CAPTCHA_LETTER_ROTATION = (-35, 35)  # Rotation range for each letter
@@ -83,6 +85,7 @@ CAPTCHA_LENGTH = 6  # Number of characters in the CAPTCHA
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
