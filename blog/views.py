@@ -1,20 +1,27 @@
 from django.shortcuts import render , get_object_or_404 
-from blog.models import BlogPost
+from blog.models import BlogPost , Comment
 from django.http import Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from blog.forms import CommentForm
+from django.contrib import messages
 
 # Create your views here.
 
 
 def blog_single_views(request,pid):
-    try:
-        
-        posts = BlogPost.objects.get(id=pid , status=1)
-        context = {'posts' : posts }
-    except BlogPost.DoesNotExist:
-            raise Http404("Given query not found....")
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Dear comment submission successful' )
+        else:
+            messages.error(request, 'Dear comment submission Wrong' )
+   
     
+    posts = BlogPost.objects.get(pk=pid , status=1)
+    comment = Comment.objects.filter(post=posts.id,approved=True)
+    form = CommentForm()
+    context = {'posts' : posts , 'comments' : comment , "form" : form}
     
     return render(request , 'blog/blog-single.html' ,context)
 

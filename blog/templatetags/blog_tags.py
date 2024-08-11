@@ -1,5 +1,5 @@
 from django import template
-from blog.models import BlogPost , Category
+from blog.models import BlogPost , Category , Comment
 register = template.Library()
 
 @register.simple_tag
@@ -10,7 +10,12 @@ def posts( ):
 @register.simple_tag 
 def upper(value):
     return value.lower()
-
+@register.simple_tag
+def length(id):
+    
+    return Comment.objects.filter(post=id,approved=True ).count()
+    
+    
 @register.inclusion_tag('popular-post.html')
 def popularPost(arg):
     posts = BlogPost.objects.filter(status=1).order_by('published_date')[:arg]

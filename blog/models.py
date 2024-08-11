@@ -33,5 +33,20 @@ class BlogPost(models.Model):
     class Meta:
         db_table_comment = "Question answers"
         
+class Comment(models.Model):
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    approved = models.BooleanField(default=False)
+    create_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+    
+    
+    class Meta:
+        ordering = ['-create_date']
+    def __str__(self):
+        return " {}".format(self.subject)
     
         
