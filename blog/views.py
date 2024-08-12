@@ -7,7 +7,6 @@ from django.contrib import messages
 
 # Create your views here.
 
-
 def blog_single_views(request,pid):
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -24,6 +23,7 @@ def blog_single_views(request,pid):
     context = {'posts' : posts , 'comments' : comment , "form" : form}
     
     return render(request , 'blog/blog-single.html' ,context)
+
 
 def blog_home_views(request,**kwargs):
     posts = BlogPost.objects.filter(status=1)

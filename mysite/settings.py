@@ -82,6 +82,9 @@ CAPTCHA_FOREGROUND_COLOR = '#000000'  # Text color
 
 CAPTCHA_LENGTH = 6  # Number of characters in the CAPTCHA
 
+#logout
+LOGOUT_REDIRECT_URL = '/'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -103,6 +106,7 @@ INSTALLED_APPS = [
     "taggit",
     'index',
     'blog',
+    'account'
 ]
 
 MIDDLEWARE = [
