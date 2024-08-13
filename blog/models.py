@@ -17,6 +17,7 @@ class BlogPost(models.Model):
     category = models.ManyToManyField(Category)
     image_filed = models.ImageField(upload_to='blog/' , default='/blog/feature-img1.jpg')
     counted_view = models.IntegerField(default=0)  #(default=0)
+    login_require = models.BooleanField(default=False)
     status = models.BooleanField(default=False)
     create_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

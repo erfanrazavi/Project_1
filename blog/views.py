@@ -1,6 +1,7 @@
-from django.shortcuts import render , get_object_or_404 
+from django.shortcuts import render , get_object_or_404  , redirect 
 from blog.models import BlogPost , Comment
 from django.http import Http404
+from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from blog.forms import CommentForm
 from django.contrib import messages
@@ -8,6 +9,7 @@ from django.contrib import messages
 # Create your views here.
 
 def blog_single_views(request,pid):
+    
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -18,11 +20,15 @@ def blog_single_views(request,pid):
    
     
     posts = BlogPost.objects.get(pk=pid , status=1)
-    comment = Comment.objects.filter(post=posts.id,approved=True)
-    form = CommentForm()
-    context = {'posts' : posts , 'comments' : comment , "form" : form}
-    
-    return render(request , 'blog/blog-single.html' ,context)
+    if posts.login_require:
+         
+        comment = Comment.objects.filter(post=posts.id,approved=True)
+        form = CommentForm()
+        context = {'posts' : posts , 'comments' : comment , "form" : form}
+        
+        return render(request , 'blog/blog-single.html' ,context)
+    else:
+        return redirect(reverse('accounts:login'))
 
 
 def blog_home_views(request,**kwargs):

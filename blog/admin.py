@@ -10,7 +10,7 @@ from django_summernote.admin import SummernoteModelAdmin
 class BlogPostAdmin(SummernoteModelAdmin):
     # list_display = ['name' , 'email' , 'message']
     date_hierarchy = 'updated_date'
-    list_display = ['title' , 'author','status' , 'counted_view' , 'published_date']
+    list_display = ['title' , 'author','status' ,'login_require', 'counted_view' , 'published_date']
     empty_value_display = '-empty-'
     search_fields = ["title" , "content"]
     list_filter = ['status']
