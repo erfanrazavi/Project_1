@@ -15,15 +15,11 @@
          </div>
          <form method='post' action="{% url "accounts:login" %}">
             {% csrf_token %}
-             <div class="field">
+              <div class="field">
                <input name='username' type="text" required>
-               <label>User Name</label>
+               <label>Username or Email</label>
             </div>
-             {% comment %} <div class="field">
-               <input name='email' type="text" required>
-               <label>Email</label>
-            </div> {% endcomment %}
-            <div class="field">
+             <div class="field">
                <input name='password' type="password" required>
                <label>Password</label>
             </div>
@@ -36,13 +32,11 @@
                <div class="pass-link">
                   <a href="">Forgot password?</a>
                </div>
-            </div>
+            </div> 
             <div class="field">
                <input type="submit" value="Login">
             </div>
-            <div class="signup-link">
-               Not a member? <a href="#">Signup now</a>
-            </div>
+          
          </form>
       </div> 
       

@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.forms import AuthenticationForm ,UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+
+
 def login_views(request):
     if request.user.is_authenticated:
         return redirect('/')
@@ -14,12 +16,13 @@ def login_views(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
+
             
             if user is not None:
                 login(request, user)
                 return redirect('/')
             else:
-                form.add_error(None, 'نام کاربری یا رمز عبور نادرست است.')
+                form.add_error(None, 'please enter correct email or user name')
     else:
         form = AuthenticationForm()
 

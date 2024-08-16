@@ -106,7 +106,15 @@ INSTALLED_APPS = [
     "taggit",
     'index',
     'blog',
+    'dbbackup',
     'account'
+]
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup'}
+
+AUTHENTICATION_BACKENDS = [
+    'account.backends.EmailBackend',  # مسیر به فایل backends.py
+    'django.contrib.auth.backends.ModelBackend',  # برای استفاده از سایر روش‌های ورود
 ]
 
 MIDDLEWARE = [
